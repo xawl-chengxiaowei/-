@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+<!--    策略模式---一个问题匹配多个解决方案！-->
+//购物车结算--我们有很多的折扣结算方案！
+//=>我们有多中折扣计算方法
+//=》满100间10
+//=》满200减25
+//=》满8折
+//=》7折
+//定义一个函数，接受2个参数，价格，折扣种类！
+//一旦加一种折扣，就得修改源代码。
+
+//1.我们现在让其以闭包的形式保存起来。
+//  +对外留一个接口。
+//  +可以添加和减少！
+// function calcPrice(price,type){
+//     if (type==='100_10'){
+//         price -= 10
+//     }else if (type==='200_25'){
+//         price -= 25
+//     }else if (type === '80%'){
+//         price *=0.8
+//     }else{
+//         console.log('没有这种折扣')
+//     }
+//     return price
+// }
+//将来使用的时候
+// const res=calcPrice(320,'100_10')
+// console.log(res);
+
+//第一步 1.暂时以闭包的形式将折扣方案保存起来！
+//第二步 2.留下添加和删除折扣的接口！
+//        +函数也是一个对象
+//        +可以把函数名当做一个对象，向里面添加一些成员！
+
+const calcPrice=(function (){
+//    sale是折扣的意思,将折扣方案保存在对象中。
+    const sale = {
+        '100_10':function (price){return price -= 10},
+        '200_25':function (price){return price -= 25},
+        '80%' : function  (price){return price *= 0.8},
+    }
+    //被return回去的函数，才是calcPrice的本体
+     function calcPrice(price,type){
+    //    判断对象中有没有这个折扣类型，如果有这中折扣的类型，那么就执行
+    //    如果没有这种折扣的类型，那马就输出没有这种折扣的类型！
+        if (!sale[type]) return '没有这种折扣！'
+        //找到sale里面指定的函数计算出结果，再返回给外面！
+        return sale[type](price)
+        // console.log(sale[type](price));
+    }
+
+      //把函数当做一个对象，向里面添加成员
+    calcPrice.add=function (type,fn){
+    //    专门用来添加折扣！
+    //    判断这个折扣是否存在
+        if (sale[type])return '该折扣已经存在'
+    //    代码来到这里表示折扣不存在！
+          sale[type]=fn
+         return '添加成功！'
+
+    }
+
+      //删除一个折扣,
+    calcPrice.del = function (type){
+        // if (!sale[type]) return'没有该折扣'
+        delete sale[type]
+        // console.log(this)
+    //    这里需要返回一个值！
+    //     return calcPrice
+    }
+
+      return calcPrice
+
+})()
+//这只是函数，表示一个类或者构造函数！不需要new一个
+
+
+//添加一个折扣
+// calcPrice.add('70%',function (price){ return price *= 0.7 })
+// console.log(res)
+calcPrice.del('100_10')
+// const  res = calcPrice(320,'70%')
+const  res = calcPrice(210,'100_10')
+console.log(res);
+</script>
+
+
+
+</body>
+</html>

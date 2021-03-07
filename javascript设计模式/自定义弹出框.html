@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义弹出框</title>
+    <style>
+        .tip{
+            width: 300px;
+            height: 200px;
+            border: 1px solid #333;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+            /*display: none;*/
+        }
+        .tip>.top{
+            height: 20px;
+            background-color: aqua;
+            /*text-align: center;*/
+            padding: 10px;
+            text-align: center;
+
+        }
+        .tip>.top >span{
+            float: right;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            cursor:pointer;
+            background-color: #fff;
+            font-size: 20px;
+            text-align: center;
+            line-height: 20px;
+        }
+        .tip>.content{
+            height: 120px;
+            position: relative;
+        }
+        .tip>.content > span{
+            margin: 0;
+            position:absolute;
+            top: 50%;
+            left: 0;
+            padding: 0 20px;
+            width: calc(100% - 40px);
+            text-align: center;
+        }
+        .tip>.btns{
+            height: 40px;
+            /*background-color: aqua;*/
+        }
+        .tip>.btns>button{
+            float: right;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+<script>
+
+<!--  改造单例模式-->
+const Tip=(function(){//这是一个闭包哦！其实就是自执行函数！
+    //实现功能的类！
+    class Tip{
+        constructor() {//这是构造函数。js中本身是没有class的定义的，二6中添加了class，并且构造函数用constructor来表示！
+            //这里并不应该直接添加字符串写好的，应该是自己创建节点的形式书写，然后添加样式！
+            this.ele=document.createElement('div');
+            this.ele.className='tip'
+            //    插入到页面中
+            document.body.appendChild(this.ele)
+            this.bindEvent()
+        }
+        //1.创建并且填充内容！
+        setContent(txt){
+            this.ele.innerHTML=
+                `<div class="tip">
+    <div class="top">提示
+        <span class="close">X</span>
+    </div>
+    <div class="content">
+        <span>${ txt }</span>
+    </div>
+    <div class="btns">
+        <button class="cancel">确认</button>
+        <button class="ok">取消</button>
+    </div>
+</div>
+                `
+            this.ele.style.display='block'
+        }
+        //2.添加各种事件！
+        // event.srcElement 可以捕获当前事件作用的对象，
+        /*event.srcElement 可以捕获当前事件作用的对象！*/
+        bindEvent(){
+            //添加事件委托``本身的意思是将事件添加在制定元素上!
+            //target是捕获当前事件作用的对象
+            this.ele.addEventListener('click',e=>{
+                e=e || window.event
+                const target=e.target ||e.srcElement
+
+                if (target.className === 'close'){
+                    this.ele.style.display='none'
+                }
+                if (target.className=== 'cancel'){
+                    console.log(false)
+                }
+                if (target.className==='ok'){
+                    console.log(true)
+                }
+            })
+
+        }
+    }
+//    单例核心代码
+
+   let  instance = null
+    return function singleTom(txt){
+
+        if (!instance) instance= new Tip()//如果之前没有创建，就实现这个，new一个对象
+
+        instance.setContent(txt)
+
+        return instance //如果之前new过，那么就返回这个实例 ！
+    }
+
+})()
+
+new Tip('nihao')
+
+
+</script>
+
+</body>
+</html>

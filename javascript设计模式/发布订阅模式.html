@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*
+    * 发布订阅
+    * 有一个对象，有人一直看着他
+    * 当这里对象发生变化的时候，第三方通知看着的人，触发技能！
+    * 例子:买书！
+    * 1.普通程序员买书
+    * =》去书店 问，没有，回家*/
+    // * =》去书店 问，没有，回家*/
+//    2.发布订阅的程序员
+//    =》去书店，问，没有，留下一个联系方式给店员
+//    =》一旦有了书，分布订阅的程序员就会接到电话，
+//    =》触发技能，程序员买书！
+//     只需要一个构造函数/**/
+//    =》创建一个第三方店员的身份！
+//    我们的任务就是模拟一个addEventListener
+//    分析构造函数
+//    属性:任务队列！---我们称为消息队列
+//     {
+//         click:[fn1,fn2],
+//         abc:[fn1,fn2]
+//     }
+//方法:能向消息队列里面添加内容
+//    方法:删除消息队列里面的内容
+//    方法:触发消息队列里面的内容！
+class Observer{//类似于店员！
+    constructor() {
+        this.message={}//这里面就是一个消息队列！
+    }
+//    1.向消息队列里面添加内容！
+    on(type,fn){
+    //    type:我拜托你看着的行为
+    //    fn我要你在行为发生的时候做的事情
+    //    就应该把这些内容记录在消息队列中，（拿个小本本记下啦！）
+    //     this.message[type]={fn}
+    //  方法不行，我们需要先判断这个这个行为是否已近被注册过了
+    //    如果没有注册的话，我们应该给你赋值一下这个行为，值赋值为【】（添加个数组）
+    //    如果有，直接向数组中添加就可以了！
+        if (!this.message[type]){
+        //    消息队列里面还没有注册过
+            this.message[type]=[]
+        }
+    //    直接进行push!
+            this.message[type].push(fn)
+    }
+//    2.向消息队列里面删除内容!
+    off(type,fn){
+    //    判断  1.如果fn不存在，只有一个参type参数的情况！
+        if (!fn){
+        //    直接把这个事情取消掉
+        //    从message里面的a成员删除掉
+            delete this.message[type]
+            return
+        }
+    //    代码能来到这，表示fn存在
+    //    判断你是不是订阅过！
+        if (!this.message[type]) return
+
+    //    你确实订阅过！，我就filter删除了！
+        this.message[type]=this.message[type].filter(item=> item !== fn)
+
+
+    }
+//    3.触发消息队列里面的内容！trigger就是触发的意思！
+    trigger(type){
+    //    先判断有没有订阅过
+        if (!this.message[type]) return
+
+    //    找到了这个数组，把里面的每个函数都遍历显示出来！
+        this.message[type].forEach(item => {
+        //    item就是每一个函数！
+            item()
+        })
+
+    }
+}
+//使用构造函数创建一个实例
+    const person1=new Observer()
+
+//    当你想拜托这个person1帮你观察一些内容的时候！
+//    我要告诉店员一些行为（留电话通知你！），当行为出现的时候，告诉你干什么！
+    person1.on('a',handlerA)
+    person1.on('a',handlerB)
+    person1.on('哈哈哈',handlerC)
+
+    //删除操作，告诉person1,我这个事情你不需要管了
+    // person1.off('a')//把消息队列中属于a相关的数组清空掉！
+    // person1.off('a',handlerA)//告诉你a发生的时候，不用做handerA这个事情了，，因为a可能还有其他事情呢？
+
+    //person1 这个人一旦触发a行为，就要把后面的所有事件处理函数执行掉！
+    person1.trigger('a')
+    console.log(person1)
+
+
+
+    function handlerA(){ console.log('A')}
+    function handlerB(){ console.log('B')}
+    function handlerC(){ console.log('C')}
+    function handlerD(){ console.log('D')}
+    function handlerE(){ console.log('E')}
+    function handlerF(){ console.log('F')}
+
+</script>
+
+</body>
+</html>

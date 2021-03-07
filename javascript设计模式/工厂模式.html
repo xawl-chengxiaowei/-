@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>工厂模式,构造函数+原型</title>
+</head>
+<body>
+<script>
+    function createPerson(name,age){//返回一个对象的函数都可以称为工厂函数！
+        let  obj={
+            name,
+            age,
+            setName(name) {
+                this.name=name
+            }
+        }
+        return obj
+    }
+    let p1=createPerson('hhh',23)
+    console.log(p1);
+    // function Person(name,age)//这只构造函数！
+    // {
+    //     this.name=name;
+    //     this.age=age
+    // }
+    //     Person.prototype.setName=function (name){
+    //     this.name=name
+    // }
+    //
+    // let s1=new Person('程小伟',23)
+    // console.log(s1)
+
+//    子类型的原型能称为父类型的实例对象！这样就能实现原型链！
+//     sub.prototype=new super()//sub=new sub()
+</script>
+
+</body>
+</html>

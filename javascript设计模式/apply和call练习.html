@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p>请查看console</p>
+<script>
+<!--我们现来学习一下apply的用法！-->
+//先定义一个人类
+function Person(name,age){
+    //添加类的属性
+    this.name=name;
+    this.age=age;
+}
+//定义一个学生类
+function Student(name,age,score){
+    Person.apply(this,arguments)//这是将Person类的name，age属性继承过来了，所以不用写，表示！
+    /*而多出来到的参数就需要从新定义*/
+    this.score=score
+}
+const Stu=new Student('程小伟',"23",'99')
+console.log("name:"+Stu.name+'age:'+Stu.age+'score:'+Stu.score)
+
+//总结:call和apply的作用差不多，区别就是apply中传递参数的时候  name  age与apply的参数顺序一致，而call中顺序可以不一致，
+/*当然！apply中的参数是（this，arguments）而*/
+</script>
+
+</body>
+</html>

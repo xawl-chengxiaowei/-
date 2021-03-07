@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p>请查看console</p>
+<script>
+    // 单例模式的学习
+    function Person(){
+        this.name='程小伟'
+    }
+//    加入单例模式-->减少了重复代码！
+    let instance=null;
+
+    function singleTom(){
+
+        if (!instance) instance = new Person()//假如false 创建新实例，否则返回实例
+
+        return instance
+    }
+    const P1=singleTom()
+    const P2=singleTom()
+    console.log(P1 === P2)
+</script>
+
+</body>
+</html>

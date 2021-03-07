@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>观察者模式</title>
+</head>
+<body>
+<script>
+// <!--    观察者构造函数！-->
+    class Observer{
+        //这个构造函数，第一个参数是名字，第二个参数就是是函数
+        //---我们可以将这个构造函数看成观察者看成ennnn 校长啊 老师啊  这后面看着我们
+        constructor(name,fn=()=>{}) {
+            this.name=name
+            this.fn=fn
+        }
+    }
+//    创建2个观察者
+const bzr = new Observer('班主任',(state)=>{console.log('把你爸叫过来')})
+const xz = new Observer('校长',(state)=>{console.log('骂你的班主任！')})
+// console.log(bzr);
+// console.log(xz);
+
+//我们现在要创建被观察者---就是学生！
+//=> 要有属性，自己的状态
+//=> 队列，记录都有谁观察者自己！数组[]将老师，校长放里面
+//=>方法，能设置自己的状态，当我们需要改变的时候，要使用这个方法改变自己的状态
+//=>方法，添加观察者
+//=>方法，删除观察者
+
+//被观察者的构造函数！
+class Subject {
+    constructor(state) {
+        this.state= state
+    //    数组用来保存观察着我的人
+        this.Observers=[]
+    }
+//    设置自己的状态
+    setState(val){
+        this.state=val
+        //   当被观察者自己的状态改变的时候，需要将观察者的所有技能触发！
+//    遍历this.observer依次触发技能！
+        this.Observers.forEach(item=>{
+            //触发每个观察者的技能--叫父母啊，骂班主任啊
+            //告诉他我改变成了什么状态！
+            item.fn(this.state)
+        })
+    }
+
+//    添加观察者
+    addObserver(obs){
+    //    谁是观察者，就直接添加观察者进来--到数组中！
+    //  添加进来的时候，判断一下，如果观察者已经存在，就不用添加了！
+    //    some()只要有一个满足条件就可以了
+    //     const res=this.Observers.some(item=>item===obs)
+    //     const res=this.Observers.find(item=>item===obs)
+    //     const res=this.Observers.indexOf(obs)
+    //     const res=this.Observers.filter(item=>item===obs)
+        this.Observers=this.Observers.filter(item=>item!==obs)
+    //     const res=this.Observers.findIndex(item=>item===obs)
+        this.Observers.push(obs)
+    }
+
+//    删除观察者
+    delObserver(obs){
+    //    直接将观察者删除掉！
+    //    item=>item !==obs这里面写的是true，需要保存-->下面这是相当的删除！ 不想等的保存！
+        this.Observers=this.Observers.filter(item=>item !==obs)
+    }
+}
+//创建第一个被观察者！
+const xiaoMing=new Subject('study')
+
+//给小明添加观察者
+xiaoMing.addObserver('bzr')
+xiaoMing.addObserver('xz')
+xiaoMing.delObserver('xz')
+
+console.log(xiaoMing);
+
+</script>
+
+</body>
+</html>
