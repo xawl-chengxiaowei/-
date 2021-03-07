@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <input  type="text"><button>submit</button> 
+    <div></div>   -->
+    <script>
+// const Arr = [1,2,3]
+// let sum = 0
+// Arr.forEach((value,index,Array)=>{
+//     // console.log("每个数组元素" +value);
+//     // console.log("当前数组index索引号"+index);
+//     // console.log("Array" +Array);
+//      sum += value
+//     //  console.log(sum);
+// })
+
+// array是一个过滤器，，返回值是一个新数组
+//    const Arr = new Array(12,34,25,64)
+//    const newArr = Arr.filter((value,index)=>{
+//         return value > 20;
+//     })
+    // console.log(newArr);
+
+    // some 查找数组中是否有满足条件的元素---注意他的返回值是一个布尔值！
+    // 如果找到第一个满足条件的元素，就终止循环！
+// const Arr = new Array(12,34,52,26)
+// const a1 = Arr.some((currentIndex,index,Array)=>{//和上面第一个参数一样
+//     return currentIndex >91;
+// })
+    // console.log(a1);
+    // const a2 =["cxw","qqq","www","eee"]
+    // const a3 = a2.some((a,b,c)=>{
+    //     return a === 'cxw'
+    // })
+    // console.log(a3);
+
+    // trim 去除字符串两侧的空格
+    // var str = '            cxw '
+    // const str1 = str.trim()
+    // console.log(str1);
+
+    // trim案例
+    //     const input = document.querySelector('input')
+    //     const submit = document.querySelector('button')
+    //     const div = document.querySelector('div')
+
+    // submit.addEventListener('click',()=>{
+    //     // 输入的内容为字符串
+    //     const str = input.value.trim()
+    //     if( str ===''){
+    //         alert('输入为空')
+    //     }else{
+    //         div.innerHTML=str
+    //         console.log(str);       
+    //     }
+    // })
+
+        // const arr1 = [1,"haha","ass"]
+        // console.log(...arr1);
+        const a1 = [1,2,3]
+        const a2 = [4,5,6]
+        const a3 =[...a1,...a2]
+        // console.log(a3);
+        // array.from() 将伪数组转为真正的数组，，这还能接受第二个参数，作用类似于数组的map方法，将
+        // 处理后的数组放入返回的数组 
+        // find()方法
+        // 用于找到第一个符合条件的数组对象，如果没有找到返回underfined
+        // findIndex()
+        // 用于找出第一个符合条件的数组成员的位置，如果没有找到返回-1.
+        // includes()
+        // 表示某个数组中是否包含给定的值，返回布尔值！、
+        let arr = [1,2,5,6];
+        console.log(arr.includes(2));
+
+    
+    </script>
+    
+</body>
+</html>

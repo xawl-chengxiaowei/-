@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 浅拷贝：只拷贝一层，更深层次的对象级别的拷贝只能用引用。
+        // 深拷贝:拷贝多层,每一级别的数据都会拷贝！
+        const obj = {
+            id:1,
+            name :'baz',
+            msg:{
+                age:18
+            }
+        }
+        let o = {};
+        // for(key in obj){
+        //     // key是属性名，key[k]是属性值！
+        //     o[key] = obj[key];
+        // }
+        // console.log(o);//打印出来的msg只是一个引用！
+
+//     -----------------es6提供的属性浅拷贝属性assign！-------------------------------
+
+        Object.assign(o,obj);//第一个参数是要拷贝的，第二个参数是被拷贝的参数！
+        console.log(o);
+    </script>
+    
+</body>
+</html>

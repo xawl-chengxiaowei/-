@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <ul class="nav">
+        <li>榴莲</li>
+        <li>臭豆腐</li>
+        <li>鲱鱼罐头</li>
+        <li>大猪蹄子</li>
+    </ul>
+    闭包，延长了函数的作用范围。 -->
+    <script>
+        // 立即执行函数也称为小闭包，因为立即执行函数里面的任意一个函数（事件绑定函数）都可以使用它的i这个变量！
+        // const lis = document.querySelector('.nav').querySelectorAll('li');
+        //     for(let i =0;i<lis.length;i++){
+        //         (function(i){
+        //             lis[i].onclick=function(){
+        //                 console.log(i);
+        //             }
+        //         })(i)
+        //     }
+    // 
+    // 案例2 ：打车起步价13（3公里内），之后多一公里5元，用户输入就可以计算打车的价格
+    // 如果遇到拥堵的情况，总价格多收取10元！
+    var car =(function(){
+        let start = 13;
+        let total = 0;
+        return {
+            price:function(n){
+                if(n<3){
+                    total =start;
+                }else{
+                    total = start + (n-3)*5;
+                }
+                return total;
+            },
+            yd:function(flag){
+              return  flag==true?10+total:total;      
+            }
+        }
+    })()
+    console.log(car.price(4));
+    console.log(car.yd(true));
+
+    
+    
+    
+    
+    
+    </script>
+    
+</body>
+</html>

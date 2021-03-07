@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="haha">按钮</button>
+    <script>
+        var that;
+        class Star{
+            constructor(uname,age){
+                that = this;//将实例对象的this指向赋值给全局变量，其他地方都可以使用啦！
+                this.name = uname;
+                this.age = age;
+                this.btn = document.querySelector('button')
+                this.btn.onclick = this.sing;//打印结果为空！this指向的是btn, 谁调用指向谁。btn调用啦
+                //  记住这里不加（），否则直接调用。函数谁调用，指向谁
+            }
+           sing(){      
+                // console.log(this.name);//打印为空
+                console.log(that.name);//that里面存放的是constructor里面的this，原来的指向是实例对象，
+                // 里面没有uname~！
+            }
+        }
+        const Son = new Star('cxw')
+    
+
+    </script>
+    
+</body>
+</html>

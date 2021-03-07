@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    // Symbol的使用！
+    // 创建Symbal,创建独一无二的值！,注意，这不能进行数值运算！
+    // let s = Symbol();
+    // console.log(s,typeof(s));
+    // let s = Symbol('hahaha')
+    // console.log(s);
+    // 同时，这也可以使用Symbol.for创建！
+//    let a1 = Symbol.for('hahaha')
+//     console.log(a1);
+
+// 对象使用
+    let  youxi = {
+        name:'狼人杀',
+        [Symbol('say')]:function(){ 
+            console.log('hahaha');
+        },
+        [Symbol('tell')]:function(){
+            console.log("嘿嘿");
+        }
+    }
+    console.log(youxi);
+
+    // 在类class中使用static时、静态方法调用直接在类上进行，不能在类的实例上调用。
+    // 静态方法通常用于创建实用程序函数。
+
+
+
+
+
+
+
+    </script>
+    
+</body>
+</html>

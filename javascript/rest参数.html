@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+    // es6引入 rest参数，用来代替arguments，
+
+    // function a1 (){
+    //     console.log(arguments);
+    // }
+    // a1('haha','lala','heihei')
+
+    // 现在rest参数
+    function a1 (...args){
+        console.log(args);
+    }
+    a1('haha','lala','heihei')//返回是一个数组！
+
+
+    </script>
+    
+</body>
+</html>

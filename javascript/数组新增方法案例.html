@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        table {
+            width: 400px;
+            border: 1px solid #000;
+            border-collapse: collapse;
+            margin: 0 auto;
+        }
+        
+        td,
+        th {
+            border: 1px solid #000;
+            text-align: center;
+        }
+        
+        input {
+            width: 50px;
+        }
+        
+        .search {
+            width: 600px;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="search">
+        按照价格查询: <input type="text" class="start"> - <input type="text" class="end"> 
+        <button class="search-price">搜索</button>
+         按照商品名称查询: <input type="text" class="product"> <button class="search-pro">查询</button>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>产品名称</th>
+                <th>价格</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <script>
+        // 利用新增数组方法操作数据
+   const data = [{
+            id: 1,
+            pname: '小米',
+            price: 3999
+        }, {
+            id: 2,
+            pname: 'oppo',
+            price: 999
+        }, {
+            id: 3,
+            pname: '荣耀',
+            price: 1299
+        }, {
+            id: 4,
+            pname: '华为',
+            price: 1999
+        }, ];
+        // 1. 获取相应的元素
+   const tbody = document.querySelector('tbody')
+   const searchPrice = document.querySelector('.search-price')
+   const start = document.querySelector('.start')
+   const end = document.querySelector('.end')
+   const product = document.querySelector('.product')
+   const search_pro = document.querySelector('.search-pro')
+
+        setdate(data)
+//    重新渲染页面，封装成函数
+        function setdate(mydata){
+        tbody.innerHTML = ' '//先将数据原来的数据清空，再渲染！
+        mydata.forEach((value)=>{
+        const tr = document.createElement('tr');
+        tr.innerHTML = '<td>'+value.id+'</td> <td>'+value.pname+'</td><td>'+value.price+'</td>';
+        tbody.appendChild(tr);
+       })
+    }
+//    搜索价格
+    searchPrice.addEventListener("click",()=>{
+        let newdata = data.filter((value)=>{
+        return value.price >=start.value && value.price <= end.value;
+      })
+       setdate(newdata)      
+ })
+    // 根据商品价格搜索
+    // 查找数组中唯一的元素，用some更合适。
+    search_pro.addEventListener('click',()=>{
+        let arr =[];
+        data.some((value)=>{
+            if(value.pname === product.value){
+                arr.push(value);
+                return true
+            }  
+        })
+        //重新渲染数据
+        setdate(arr)
+    })
+
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>

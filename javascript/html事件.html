@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .textarea{
+        height: 100px;
+        width: 200px;
+        overflow-y: scroll;
+    }
+    .span1{
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        font-size: 26px;
+    }
+    .span2{
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        font-size: 26px;
+    }
+</style>
+<body>
+    <div>
+        <textarea oninput="emit()" class="textarea">
+        </textarea>
+    </div>
+    <div>
+        已输入<span class="span1" id="span1">0字</span>
+        还可以输入<span class="span2" id="span2">140</span>字
+    </div>
+    <script>
+    var textarea = document.querySelector('.textarea');
+    var span1 = document.getElementById('span1');
+    console.log(span1.value);
+    var span2 = document.getElementById('span2');
+    function emit(){
+        var max = 140;
+        if(textarea.value.length > max ){
+            textarea.value = textarea.value.subString(0,max);//只取140个字。
+            span2.innerText = 0;
+            alert('您输入的字数已经超过了140字');
+
+        }else{
+            span1.innerText = textarea.value.length;
+            span2.innerText = max - textarea.value.length;
+        }
+    }
+
+    </script>
+    
+</body>
+</html>

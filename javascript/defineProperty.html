@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    function Father(){
+        console.log(this);
+    }
+    new Father()
+    // 绑定事件函数
+    // 绑定事件函数的this指向的是函数的调用者btn这个按钮对象。
+    // btn.onclick = function(){}
+    // btn.onclick = function(){}
+    // btn.onclick = function(){}
+    // btn.onclick = function(){}
+
+
+    // Object.defineProperty 定义新属性或修改原来的属性
+    // var obj = {
+    //     id: 1,
+    //     pname: '小米',
+    //     price: 3999
+    // };
+    // 
+    // 原来的方法
+    // obj.sum = 1000;
+    // console.log(obj);
+
+    // 现在的方法---用Object.defineProperty实现这些操作！
+    // Object.defineProperty(obj,'price',{
+    //     value:10000,
+    //     writable:true ,//这是用来设置是否可以被修改
+    //     enumerable:true,//为false，不允许遍历，默认为false！
+    //     configurable:false//为false  不允许删除，默认为false！
+    // })
+    // console.log(obj);
+    // console.log(Object.keys(obj));//测试enumerable
+
+    
+</script>
+    
+</body>
+</html>

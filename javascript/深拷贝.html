@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+ <script>
+    // 浅拷贝:只拷贝一层,更深层次的对象级别的拷贝只能用引用。
+    // 深拷贝:拷贝多层,每一级别的数据都会拷贝！
+    var obj = {
+        id: 1,
+        name: 'andy',
+        msg: {
+            age: 18
+        },
+        color: ['pink', 'red']
+    };
+    let o = {};
+        function deepCopy(newObj,oldObj){
+             // 判断copy的类型
+            for(let k in oldObj){        
+                // 1.获取属性值
+                const item = oldObj[k]
+                // 2.判断是否是数组类型
+                if(item instanceof Array){
+                    newObj[k] = item;//item数组里面可能还有数组，对象！
+                    deepCopy(newObj[k],item);
+                // 3.判断是否是对象类型
+                }else if(item  instanceof Object){
+                    newObj[k] ={}
+                    deepCopy(newObj[k],item) 
+                // 4.判断是否是普通的类型  
+                } else{
+                    newObj[k] = item;
+                }      
+            }
+            return newObj;
+        }
+
+       const result = deepCopy(o,obj)
+       console.log(result);
+
+
+
+        
+ </script>
+
+
+    
+
+
+</body>
+</html>

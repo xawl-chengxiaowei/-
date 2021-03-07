@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Object.keys  获取对象所有的键
+        // Object.values  获取对象所有的值。
+        // Object.entries  返回的是一个数组,主要和map映射相关联使用！
+        // Object.entries 是将对象转为二维数组。
+        // Object.fromEntries 是将二维数组转为对象。
+        const obj = {
+            name:'cxw',
+            age :23,
+            score:99
+        }
+        // console.log(Object.keys(obj));
+        // console.log(Object.values(obj));
+        console.log(Object.entries(obj));
+        // 创建map.
+        const m = new Map(Object.entries(obj))
+        console.log(m);
+        console.log(m.get('name'));
+
+        // es9   正向断言和反向断言（针对的是正则表达式！）
+
+        // dotAll模式！（正则表达式）
+
+        // trimStart 和trimEnd 是清除字符串左侧，右侧字符！。
+
+        // flat 和 flatMap 将多维数组降为flag(参数)  参数表示的是深度，降多少维 ，默认为一。 
+
+
+
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+// async 函数
+// async function fn(){//async  返回的是一个promise。
+    // 1，当返回的结果不是一个promise类型的对象的时候，返回的是成功的promise。即返回resolve-》then。
+    // return 'hahaha'
+    // 2.抛出错误，返回的结果是一个失败的promise。
+
+    // throw new Error('出错啦')
+    // 3.返回的结果就是一个promise呢？看里面的resolve咯！
+//     return new Promise((resolve,reject)=>{
+//         // resolve('成功的数据');
+//         reject('失败的数据')
+//     })
+// }
+//     const result = fn();
+//     result.then((data)=>{
+//         //  console.log(data);
+//     }).catch((err)=>{
+//         console.log(err);
+//     })
+
+// await。
+
+// 创建promise 对象。
+const p = new Promise((resolve,reject)=>{
+    // resolve('成功的值');// await 返回的结果就是promise成功的值。类似于同步,不成功不罢休！
+       reject("失败的值");//失败的值要捕获！
+})
+  async function main(){  
+    try{
+        let result = await p;
+        console.log(result);
+    }catch(e){
+        console.log(e);
+
+    }
+
+}
+
+  main()
+
+
+
+
+</script>
+    
+</body>
+</html>

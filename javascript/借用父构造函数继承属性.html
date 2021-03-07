@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>借用父构造函数继承子类</title>
+</head>
+<body>
+    <script>
+// 类的本质其实是一个函数，是构造函数的另一种写法
+
+
+
+        function Father(uname,age){
+            // this指向父构造函数
+            this.uname = uname;
+            this.age = age;
+            Father.prototype.money = function(){//money方法
+            
+            }
+        }
+
+        function Son(uname,age,score){
+            // this指向son构造函数
+            // 将父构造函数的this转为子构造函数
+            Father.call(this,uname,age);
+            this.score = score;//既可以继承父亲的属性，也可以定义自己的
+
+            // 子组件继承父组件方法
+            Son.prototype=new Father()//因为将子元素的原型对象 指向父元素的实例对象
+            Son.prototype.constructor = Son;//所以覆盖了子Son原来的constructor,现在指向父，所以要重新指向Son类的构造函数。
+        }
+        const son = new Son('cxw',23)
+        console.log(son);
+        console.log(Son.prototype.constructor)
+
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>click me</button>
+    <button>click me</button>
+    <button>click me</button>
+<script>
+    // callde的使用
+    // function fn(x,y){
+    //     // console.log("我想你拉");
+    //    console.log(x + y);
+    //    console.log(this);//这是下面的call直接将这里面的this改变了！
+    // }
+    // let o={
+    //     name:'cxw'
+    // }
+    // 1.用call调用函数
+    // fn.call()//相当于fn
+    // // 2.可以改变this的指向,下面，让this指向o对象.同时，这里也可以使用fn函数
+    // fn.call(o,2,3);
+    // console.log();
+
+    // apply() 也是调用函数，改变this的指向。
+    // 但是，他的参数必须是一个数组！
+    // 应用，利用apply借助于数学内置对象求最大值。
+    // Math.max().this指向Math。
+    // apply(o,['pink'])
+    // let arr = [12,43,2,31,89]
+    // const max = Math.max.apply(Math,arr)
+    // console.log(max);
+
+    // bind()最大区别,不能调用,也能改变this的指向,其他的和call一样，类似于copy
+    // ！！返回的是原函数改变this后的新函数。
+    // const o={
+    //     name:'haha'
+    // }
+    // function fn(){
+    //     // o.bind(this,"参数")
+    //     console.log(this);//this已经改变，指向o
+    // }
+    // let fn1= fn.bind(o)
+    // fn1();//调用新函数！
+
+    // bind的案例
+    const btns = document.querySelectorAll('button');
+
+    // 绑定事件函数
+    // btns.onclick = function(){
+    //      this.disabled = true;//这行this指向btn。
+    //      setInterval(function(){
+    //        this.disabled = false//定时器原来的this指向的是window，现在通过bind,将this指向btn！
+    //      }.bind(this),2000)//这行this指向btn
+    // }
+
+    for(let i = 0;i<btns.length;i++){
+        btns[i].onclick = function(){
+            this.disabled = true;
+            setInterval(function(){
+                this.disabled = false
+            }.bind(this),1500)
+        }
+    }
+
+
+
+
+
+
+
+</script>    
+</body>
+</html>
