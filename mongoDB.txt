@@ -1,3 +1,5 @@
+//这是mongoDB的简单练习！
+
 use my_test
 
 db.users.insert({
