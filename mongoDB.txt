@@ -1,0 +1,118 @@
+use my_test
+
+db.users.insert({
+    username:"cxw"
+})
+
+db.users.find()
+
+db.users.insert({
+    username:"lpt"
+})
+db.users.find().count()//查看数量
+
+db.users.find({username:"cxw"})//查找特定的属性
+
+// 在特定的文档中添加新的属性属性值
+db.users.update({username:"cxw"},{$set:"hahaha"})
+
+// 替换
+db.users.replaceOne({username:"cxw"},{username:"cxwhaha"})
+
+// // 删除
+// db.users.update({username:"cxwhaha"},{$unset:{address:1}})
+
+// mongodb的属性值也可以是一个文档！当一个文档的属性值是文档时，叫做内嵌文档！
+db.users.update({
+    username:"cxw"
+},
+{
+    $set:{
+        hobby:{
+            movies:["aa","bb"]
+        }
+    }
+ 
+})
+//如果通过内嵌文档进行查询，必须要通过.进行查询
+//使用内嵌文档进行查询的时候，属性名必须要添加引号 
+// db.users.find({”hobby.movies“:"hero"})
+
+// 向属性名为tangseng1的属性值中添加一个新的电影interstellar
+
+// 使用$push 表示向数组中添加一个新的元素！如果数组中已经荀子啊啦该元素，则不会在添加！
+
+db.users.update({username:"tangseng"},{$push: {"hobby.movues":"interstellar"}})
+
+// 
+// $addToSet  也是向数组添加新的元素！和$push一样。
+
+// 删除喜欢北京的用户
+db.users.remove({"hobby.cities":"benjing"});
+
+// 删除user的用户 --两种方法
+db.users.remove({});
+db.users.drop();
+
+// 向number集合中插入2000条数据  7.2秒   太慢！！
+for(var i=1;i<20000;i++){
+    db.numbers.insert({num:i})
+}
+
+// 
+// 优化！减少insert插入的次数 先循环 然后再插入 只插入一次！
+var arr = [];
+for(var i=1;i<20000;i++){
+    arr.push({num:i})
+}
+db.numbers.insert(arr)
+
+
+// 查询numebr中num为500的文档
+db.numbers.find({num:500})
+
+// 查询numebr中num大于500的文档
+
+db.numbers.find({num:{$gt:5000}})//小于$lt,
+
+// 查询numebr中num大于40小于50的文档
+
+db.numbers.find({num:{$gt:40,$lt:50 }})
+
+// 查询number中numbers前10条数据
+db.numbers.find({num:{$slt:10}})
+
+//设置显示数据的上限
+db.numebrs.find().limit(10)
+
+// skin() 用于跳过指定数量的数据
+// 查询number中numbers前11-20条数据skip(页面减一)limit(每页显示的条数!)
+db.numbers.find().skip(10).limit(10);
+
+//将德普特和empty集合导入到数据库中
+
+/**文档之间的关系  一对一  一对多  多对多 */
+
+// 实现一对多的关系
+
+// 实现多对多的关系
+
+// 查询文档的时候，默认是按照_id的值进行排序（升序）
+// sort（）可以用来指定文档的排序的规则
+//这是按照sal字段进行排序！sort需要传递一个对象来指定排序规则  1表示升序，-1表示降序！
+db.numbers.find({}).sort({sal:1})
+
+
+// 在查询的时候。可以在第二个参数的位置来设置查询的结果的投影---只查询第二个属性内容
+db.emp.find({},{ename:1})//只显示员工的额姓名
+db.emp.find({},{ename:1,_id:0,sal:1})//显示姓名和工资，不显示_id.
+
+
+
+
+
+
+
+
+
+
