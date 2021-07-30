@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!--  深浅拷贝  -->
+    浅拷贝   赋值 的区别
+    var person = {}  左边的person 保存在栈中，右边的{}保存在堆中
+    赋值:当我们把一个对象复制给一个新的变量时，赋的其实时该对象在栈中的地址，而不是堆中的数据。
+    也就是两个对象指向的是同一个存储空间，无论是哪个对象发生了改变其实都是改变的存储空间的内容，因此，两个对象是联动的 
+    浅拷贝: 重新在堆中创建内存，拷贝前后的对象的基本数据类型互不影响，但拷贝后对象的引用类型因共享同一块内存，会相互影响。
+    深拷贝：从堆内存中开辟一个新的区域存放新的对象，对对象中的子对象进行递归的拷贝，拷贝的前后的两个对象互不影响。
+    <!---
+        第一种方式:使用的是递归调用的方式
+        第二种方式：使用JSON的方式！缺点是JSON和函数拷贝不了！
+
+    深拷贝使用JOSN.stringify(arr)和JSON.parse(xxx)的优化！
+    定义一个包含都过类型的数组arr
+    JSON.stringify(arr), 将一个 JavaScript 对象或值转换为 JSON 字符串
+    JSON.parse(xxx), 方法用来解析JSON字符串，构造由字符串描述的值或对象
+    方式:JSON.parse(JSON.stringify(obj));
+    理解：
+        我们可以理解为，讲原始的数据转换为新的字符串，再通过新的字符串还原为一个新的对象，
+        这种改变数据类型的方式，间接的绕过了拷贝对象引用的过程，也就谈不上影响原始的数据！
+    -->
+    <script type="text/javascript">
+   var  Person = {
+       name:"cxw",
+       habbies:["看电影","跑步",["羽毛球","打篮球"]],
+       age:23
+   }
+//    浅拷贝
+//  function shallowClone(obj){
+//      var target = {};
+//      for(var i in obj){
+//         if(obj.hasOwnProperty(i)){
+//             target[i] = obj[i]
+//         }
+//      }  
+//      return target;
+//  }
+
+// 递归实现深拷贝!
+    function deepClone(obj){
+
+        var target = {};
+
+        // 特殊情况的选择！
+        if(obj === null)  return obj;
+        if(obj === Date)  return new Date(obj);
+        if(obj === RegExp)  return new RegExp(obj);
+
+// 停止递归调用的方法
+        if(typeof obj !== 'object') return obj;
+
+        for(var i in obj){
+
+            if(obj.hasOwnProperty(i)){
+                target[i] = deepClone(obj[i])
+            }
+        }
+        return target
+    }
+//  测试
+// var target1 = new  deepClone(Person);//第一种递归调用实现方式
+var target1 = JSON.parse(JSON.stringify(Person))//使用JSON的方式实现递归调用的方式！
+target1.name = 'hahaha';
+target1.age = 99
+// target1.habbies[0] = 'haha';
+console.log(Person);
+console.log(target1);
+
+// console.log(target1.constructor);
+
+ 
+
+
+
+
+    </script>
+    
+</body>
+</html>

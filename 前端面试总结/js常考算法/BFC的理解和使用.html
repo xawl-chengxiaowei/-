@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BFC的使用</title>
+
+    <style>
+        .father{
+            background-color: red;
+            /* float: left;第一种方式* */
+            /* position:absolute; */
+            /* display: inline-block; */
+            overflow: hidden;/*4这是最好的!*/
+        }
+        .son{
+            height: 300px;
+            width: 300px;
+            background-color: aqua;
+            float: left;
+        }
+    </style>
+</head>
+<body>
+    <!--BFC
+    块级格式化上下文，指的是一个独立的块级渲染区域，该区域拥有一台渲染过着来约束块级盒子的布局，且与区域的外部无关
+    原由:当一个盒子不设置高度，当内容子元素都浮动起来的时候，无法撑起来自身！是因为这个盒子没有设置BFC。
+    #如何创建BFC
+    1: float的值不是none。
+    2：position的值不是static或者是relative
+    3: display 的值是inline-block,flex或者是inline-flex;
+    4: overflow:hidden.
+    #BFC的作用:
+      1:取消盒子的margin塌陷!
+      2:阻止元素被浮动元素覆盖！
+    -->
+    <div class="father">
+        <div class="son">1</div>
+        <div class="son">2</div>
+        <div class="son">3</div>
+
+    </div>
+    
+</body>
+</html>

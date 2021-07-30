@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>test2</title>
+
+</head>
+<body>
+查看打印
+<script type="text/javascript">
+    function  fun(){
+
+    }
+    fun.prototype.test = function(){
+        console.log('test()');    
+    }
+
+    console.log(fun.prototype);//这默认指向的是一个空对象！
+    
+    fun()
+</script>
+</body>
+</html>

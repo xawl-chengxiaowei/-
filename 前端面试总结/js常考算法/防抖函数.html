@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>防抖节流理解</title>
+</head>
+<body>
+    <!-- 防抖函数 
+eg:
+    当我们持续的触发一个事件的时候（eg:鼠标一直输入内容）,事件会持续触发，性能会很差，我们需要优化
+    所以规定在一定时间内持续点击不会发生事件，当 最后一次触发的时候并且在一定时间没有触发！。。我们的事件处理函数才会
+    执行一次！如果在设定的时间内 又一次的触发了事件，就重新开始计时！
+    概念：当持续的触发事件一定时间内没有再触发事件,
+    事件处理函数才会执行一次 如果在设定的时间内 又一次的触发了事件，就重新开始计时！
+    -->
+    <input type="text" id="input">
+    <script>
+        //  （1）   let timer;
+        //   使用   clearInterval
+        function debounce(delay,callback){
+            let timer;
+            return function(value){            
+            clearInterval(timer)//我们需要清除setTimeout,(在每次触发事件之前)定义time,  使用（1）如果使用clearInterval  会造成underfined,
+            // 我们应该存储这个timer这个变量！需要一直保存在内存当中，这时候，我们想到了闭包！因为这会使得内存的泄露            
+                timer = setTimeout(()=>{
+                    // console.log(value);
+                    // 我们想要传入的结果传出去，再定义一个函数！
+                    callback(value)
+                },delay)
+            }
+        }
+        function fn(value){
+            console.log(value);     
+        }
+            var button = document.getElementById('input')
+            var debounceFn = debounce(1000,fn);//一定的时间规定为1秒！上面执行后return出来的直接就是函数,所以可以执行
+            button.addEventListener("keyup",(e)=>{
+                debounceFn(e.target.value)
+            })
+    </script>
+
+
+</body>
+</html>

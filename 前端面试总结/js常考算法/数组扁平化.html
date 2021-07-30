@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!---数组扁平化是将一个多维数组变成一个一维数组-->
+    <!-- 方法一：arr.flat(Infinity)实现数组扁平化
+
+    flat 方法会按照一个可指定的深度递归遍历数组，
+    并将所有元素的遍历到的子数组中的元素合并成为一个的新的数组返回 infinity表示的是深度，表示的是正无穷！
+    [1,[12,23,[22,24]]] ==>[1,12,23,22,24]
+    arr.flat(Infinity)数组扁平化
+    所谓数组扁平化就是将数组中并不规则的多维数组去除维度，使之变为一维数组。
+
+    let newArray = arr.flat(depth)
+    flat() 方法会按照一个可指定的深度递归遍历数组，并将所有元素与遍历到的子数组中的元素合并为一个新数组返回。 其中，depth指定要提取嵌套数组的结构深度，默认值为1。
+
+    但使用 Infinity 作为深度，展开任意深度的嵌套数组
+
+    方法二:利用正则表达式改良版
+    const res2 =  JSON.parse('['+JSON.stringify(arr).replace(/\[|\]/g),'')+']')
+    
+    方法三 函数递归：
+        const res = [];
+        const fn = arr()=>{
+            for(let i =0;i<arr.length;i++){
+                if(Array.isArray(arr[i])){
+                    fn()arr[i]
+                }else{
+                    res.push(arr[i])
+
+                }
+            }
+        }
+        方法四:使用 reduce
+        const flattrn = arr()=>{
+            return arr.reduce(function(pre,cur){
+                return pre.concat(Array.isArray(cur)?flatten(cur):cur)
+            },[])
+        }
+    -->
+    <script>
+    var arr1 = [1,[2,[3,4],5],6];
+    // 方法1:es6语法实现
+    //  console.log(arr1.flat(Infinity));
+    // 方法2:正则实现
+    //  const res2 = JSON.parse('['+JSON.stringify(arr1).replace(/\[|\]/g,' ')+']')
+    //  console.log(res2);
+    // 方法3:递归实现
+        // const res = [];
+        // const fn = (arr)=>{
+        //     for(let i =0;i<arr.length;i++){
+        //         if(Array.isArray(arr[i])){
+        //             fn(arr[i])
+        //         }else{
+        //             res.push(arr[i])
+        //         }
+        //     }
+        //     return res
+        // }
+        // const r = fn(arr1)
+        // console.log(r);
+
+        // 方法四:reduce实现!
+        // const newArray = (arr) =>{
+        //     return arr.reduce(function(pre,cur){
+        //         return pre.concat(Array.isArray(cur)?newArray(cur):cur)
+        //     },[])
+        // }
+
+
+        const newArray = function(arr){
+            return arr.reduce(function(pre,cur){
+                // 判断是的话就递归调用,不是的话就与上一个pre 连接起来！
+                return pre.concat(Array.isArray(cur) ? newArray(cur):cur)
+            },[])
+        }
+
+      const  res2 = newArray(arr1)
+      console.log(res2);
+      
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+    var obj ={
+        name:'cxw'
+    }
+    function Child(name){
+        this.name = name
+    }//这是构造函数
+
+    Child.prototype = {//这是构造函数所指向的原型对象空对象，所以要指定constructor！
+        constructor:Child,
+        showName:function(){
+           console.log(this.name);
+           
+        }
+    }
+
+    var child = new Child('zjl');
+    child.showName()//zjl
+
+// 这里都是改变了this的指向！ 将this指向了obj对象!
+    child.showName.call(obj)
+    child.showName.apply(obj)
+    var bind = child.showName.bind(obj)
+    bind()
+
+    // call 和 apply 的区别！
+    //  eg:求数组中的最大值
+     var arr = [12,13,17,2,5];
+
+     console.log(Math.max.call(null,12,13,17,2,5));//call参数 是以参数列表的形式传入
+     console.log(Math.max.apply(null,arr));//apply参数 是以数组的形式传入
+
+    //  call,apply和bind的区别:前面两个会立即执行，而bind不会立即执行！
+     
+     
+
+
+
+
+    </script>
+    
+</body>
+</html>

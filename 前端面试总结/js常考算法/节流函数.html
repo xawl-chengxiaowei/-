@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>防抖节流理解</title>
+</head>
+<body>  
+        节流函数
+            当持续的触发事件的时候，保证在一段事件内，只调用一次事件函数 一段时间内  只做一件事
+            #实际的应用  表单的提交
+            当鼠标不断的点击的时候，规定在N秒内多次点击只有一次生效。
+    <button id="button">Click me</button>
+    <script>
+        function throttle(func,wait){
+          let timer;
+          return function (){
+              console.log("到回调函数这里啦！"); 
+                if(!timer){
+                  timer = setTimeout(()=>{
+                         func()
+                        //  每次触发完之后，将结果置为null;
+                        timer = null;
+                    },wait)
+                }
+            }
+        }
+        function handle(){
+            console.log(Math.random());
+        }
+        // var button1 = document.getElementById('button');
+        // button1.addEventListener("click",()=>{
+        //     console.log("触发了点击事件"); 
+        //     this.throttle(handle,2000)
+        // })
+            document.getElementById('button').onclick = throttle(handle,2000)
+    </script>
+</body>
+</html>

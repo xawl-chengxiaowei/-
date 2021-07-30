@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    reduce的使用---统计数组中的个数！及数组去重！
+    <script>
+        // var  arr1 = ['cxw','lpt','haha','syl','cxw','cxw'];
+        // const res = arr1.reduce((pre,cur)=>{
+        //     // 判断新数组没有arr1值 添加  有点话++ 
+        //         if(cur in pre){//存在就value就加一
+        //             pre[cur] ++;
+        //         }else{
+        //             pre[cur] = 1;                    
+        //         }
+        //         return pre;
+        // },{})//初始化设置为对象！
+        // console.log(res);
+        
+         var arr1 = [1,3,1,2,4,5,8,1,3]
+         const res = arr1.reduce((pre,cur)=>{
+            if(!pre.includes(cur)){
+        // 如果在数组中存在,直接返回，不存在就concatl起来
+                return pre.concat(cur)
+            }else{
+                return pre
+            }
+        },[])
+        console.log(res);
+        
+
+
+    </script>
+    
+</body>
+</html>
